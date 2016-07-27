@@ -36,6 +36,15 @@
 <div id="user-region"></div>
 <div id="user-country"></div>
 <div id="message"></div>
+<div class="weather">
+    <h3>
+        <em class = "degree"></em><em class = "unit"></em>
+        <em class = "description"></em>
+    </h3><br>
+    <strong>Humidity:</strong> <em class="humidity"></em><br>
+    <strong> Wind Speed:</strong> <em class="wind"></em><br>
+    <strong> Pressure:</strong> <em class="pressure"></em><br>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -87,12 +96,20 @@
             success: function (data) {
                 $('#message').html(JSON.stringify(data));
                 console.log(data);
+                showWeather(data);
             },
             error:function (err) {
                 console.log(err);
             }
         });
-
+    var showWeather= function (data) {
+        $('.degree').html(data.main.temp);
+        $('.unit').html(' F');
+        $('.description').html(data.weather[0].description);
+        $('.humidity').html(data.main.humidity);
+        $('.wind').html(data.wind.speed);
+        $('.pressure').html(data.main.pressure);
+    }
     };
 
 
