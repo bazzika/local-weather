@@ -19,6 +19,8 @@
 
     .wrapper {
         background-color: #dddddd;
+        color: red;
+        background-image: url('images/bluesky.jpg');
     }
 
     .top {
@@ -41,9 +43,12 @@
         <em class = "degree"></em><em class = "unit"></em>
         <em class = "description"></em>
     </h3><br>
+    <img src='' class="icon">
+
     <strong>Humidity:</strong> <em class="humidity"></em><br>
     <strong> Wind Speed:</strong> <em class="wind"></em><br>
     <strong> Pressure:</strong> <em class="pressure"></em><br>
+    <strong> ID:</strong> <em class="weatherID"></em><br>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -94,9 +99,10 @@
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('#message').html(JSON.stringify(data));
-                console.log(data);
+//                $('#message').html(JSON.stringify(data));
+//                console.log(data);
                 showWeather(data);
+               changeBGPicture(data);
             },
             error:function (err) {
                 console.log(err);
@@ -109,7 +115,31 @@
         $('.humidity').html(data.main.humidity);
         $('.wind').html(data.wind.speed);
         $('.pressure').html(data.main.pressure);
+        $('.icon').prop('src','http://openweathermap.org/img/w/'+data.weather[0].icon+'.png');
+        $('.weatherID').html(data.weather[0].id);
     }
+
+        var changeBGPicture= function(data) {
+            var id=data.weather[0].id;
+            if (id>=200&&id<300){
+                $('.wrapper').css("background-image", 'url(images/thunderstorm.jpg)');
+            } else if (id>=300&&id<=321) {
+                $('.wrapper').css("background-image", 'url(images/drizzle1.jpg)');
+            } else if (id>=500&&id<=531) {
+                $('.wrapper').css("background-image", 'url(images/rain.jpg)');
+            }else if (id>=600&&id<=622){
+                $('.wrapper').css("background-image", 'url(images/snow.jpg)');
+            }
+//            else if(id>=701&&id<=781){
+//                $('.wrapper').css("background-image", "url()");
+//            }
+        else if(id==800){
+                $('.wrapper').css("background-image", 'url(images/bluesky.jpg)');
+            }else if (id>=801&&id<=804){
+                $('.wrapper').css("background-image", 'url(images/clouds.jpg)');
+            }else
+                $('.wrapper').css("background-image", 'url(images/bluesky.jpg)');
+        }
     };
 
 
