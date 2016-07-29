@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Local weather</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+</head>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+    body {
+        text-align: center;
+        color: #D5DFDD;
+        font-family: 'Segoe UI','Trebuchet MS', Helvetica, Arial, sans-serif;
+        font-weight: bolder;
+    }
+
+    footer {
+        text-align: center;
+        padding-top: 200px;
+        font-size: 18px;
+        text-decoration: none;
+    }
+    a {
+        text-decoration: none;
+        color:inherit;
+    }
+    a:hover {
+        text-decoration: none;
+        color: snow;
+    }
+
+    .wrapper {
+        background-color: #dddddd;
+        color: #D5DFDD;
+        background-image: url('images/bluesky.jpg');
+        margin-top: 20px;
+    }
+
+    .top {
+        text-align: right;
+        padding: 10px 20px 20px 10px;
+        color: #D5DFDD;
+        position: absolute;
+        right: 10px;
+
+    }
+
+    .container {
+        position: relative;
+        width: 270px;
+        vertical-align: middle;
+
+        margin-top: 20px;
+        background-color: cadetblue;
+        padding: 20px -10px 20px -10px;
+        border-radius: 15%;
+        opacity: 0.9;
+
+    }
+
+    .weather {
+        text-align: center;
+        padding-left: 50px;
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #user-city {
+        padding-top: 30px;
+        font-size: 3em;
+    }
+
+    #user-country {
+        font-size: 15px;
+        font-weight: 200;
+    }
+
+    h1 {
+        font-weight: 700;
+        font-family: 'Segoe UI',sans-serif;
+        font-size: 2em;
+        font-stretch: ultra-expanded;
+    }
+
+    p {
+        text-align: left;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .degree {
+        font-size: 4em;
+    }
+
+    .unit {
+        font-size: 4em;
+    }
+
+    #one {
+        text-align: right;
+        padding-top: 0px;
+        width: 46%;
+    }
+
+    #two {
+        text-align: justify;
+        vertical-align: middle;
+        font-weight: 600;
+        padding-top: 10px;
+        width: 46%;
+    }
+
+    .alldata {
+        padding-top: 20px;
+    }
+    @-webkit-keyframes pulsate {
+        50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
+    }
+    @keyframes pulsate {
+        50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
+    }
+    .unit {
+        color: rgb(245,245,245);
+        text-shadow: 0 -1px rgba(0,0,0,.1);
+        -webkit-animation: pulsate 1.2s linear infinite;
+        animation: pulsate 1.2s linear infinite;
+    }
+    .focused{background:#abcdef};
+
+</style>
+<body class="wrapper">
+<!--<div class="row top">-->
+    <!--<h1>LOCAL WEATHER APP </h1>-->
+<!--</div>-->
+<div id="user-city"></div>
+<div id="user-region"></div>
+<div id="user-country"></div>
+<div id="message"></div>
+<div class="container">
+    <div class="row alldata">
+        <div class=".col-xs-6 col-md-6" id="one">
+            <img src='' class="icon">
+        </div>
+        <div class=".col-xs-6 col-md-6" id="two">
+            <span class="description"></span>
+        </div>
+        <div class=".col-xs-12 col-md-12">
+            <span class="degree"></span><span class="unit"></span>
+        </div>
+    </div>
+    <div class="row weather">
+        <div class="col-md-12">
+            <p>Humidity:  <strong class="humidity"></strong></p>
+            <p>Wind:  <strong class="wind"></strong></p>
+            <!--<p>Pressure: <strong class="pressure"></strong></p>-->
+            <!--<p>ID: <strong class="weatherID"></strong></p>-->
+        </div>
+    </div>
+</div>
+<footer>
+    <a href="https://www.freecodecamp.com/challenges/show-the-local-weather"><h1>LOCAL WEATHER APP</h1></a>
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="http://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        $("#user-city").text(ymaps.geolocation.city);
+//        $("#user-region").text(ymaps.geolocation.region);
+        $("#user-country").text(ymaps.geolocation.country);
+        var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        var apiID = '6c60640e68da403027951ee0b9d7e153';
+        var apiURL = api + ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
+        console.log(apiURL);
+        $.ajax({
+            url: apiURL,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+//                $('#message').html(JSON.stringify(data));
+//                console.log(data);
+                showWeather(data);
+                changeBGPicture(data);
+                toggleButton(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+        function showWeather(data) {
+            $('.degree').html(Math.round((data.main.temp) * 9 / 5 - 459, 67));
+            $('.unit').html('°F');
+            $('.description').html(data.weather[0].description);
+            $('.humidity').html(data.main.humidity + '%');
+            $('.wind').html(data.wind.speed + 'm/s');
+//        $('.pressure').html(data.main.pressure);
+            $('.icon').prop('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+//            $('.weatherID').html(data.weather[0].id);
+        }
+
+        function changeBGPicture(data) {
+            var id = data.weather[0].id;
+            if (id >= 200 && id < 300) {
+                $('.wrapper').css("background-image", 'url(images/thunderstorm.jpg)');
+            } else if (id >= 300 && id <= 321) {
+                $('.wrapper').css("background-image", 'url(images/drizzle1.jpg)');
+            } else if (id >= 500 && id <= 531) {
+                $('.wrapper').css("background-image", 'url(images/rain.jpg)');
+            } else if (id >= 600 && id <= 622) {
+                $('.wrapper').css("background-image", 'url(images/snow.jpg)');
+            }
+//            else if(id>=701&&id<=781){
+//                $('.wrapper').css("background-image", "url()");
+//            }
+            else if (id == 800) {
+                $('.wrapper').css("background-image", 'url(images/sunnyday1.jpg)');
+            } else if (id >= 801 && id <= 804) {
+                $('.wrapper').css("background-image", 'url(images/clouds.jpg)');
+            } else
+                $('.wrapper').css("background-image", 'url(images/bluesky.jpg)');
+        }
+        function toggleButton(data) {
+            var $unit = $('.unit');
+            var $degree = $('.degree');
+            $unit.on('click', function () {
+//                $unit.text('°F');
+                if ($unit.text()==='°F') {
+                    $degree.text(Math.round(data.main.temp - 273.15));
+                    $unit.text('°C');
+                } else {
+                    $degree.text(Math.round((data.main.temp) * 9 / 5 - 459, 67));
+                    $unit.text('°F');
+                }
+            });
+        }
+
+    };
+
+</script>
+</html>
