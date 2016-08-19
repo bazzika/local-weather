@@ -56,7 +56,7 @@
         $("#user-city").text(ymaps.geolocation.city);
 //        $("#user-region").text(ymaps.geolocation.region);
         $("#user-country").text(ymaps.geolocation.country);
-        var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+        var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
         var apiID = '6c60640e68da403027951ee0b9d7e153';
         var apiURL = api + ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
         console.log(apiURL);
@@ -82,7 +82,7 @@
             $('.humidity').html(data.main.humidity + '%');
             $('.wind').html(data.wind.speed + 'm/s');
 //        $('.pressure').html(data.main.pressure);
-            $('.icon').prop('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+            $('.icon').prop('src', 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
 //            $('.weatherID').html(data.weather[0].id);
         }
 
