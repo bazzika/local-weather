@@ -72,7 +72,7 @@
 
         margin-top: 20px;
         background-color: cadetblue;
-        padding: 20px -10px 20px -10px;
+        padding: 20px -10px 40px -10px;
         border-radius: 15%;
         opacity: 0.9;
         box-shadow: inset 0 0 10px 0 rgba(0,0,0,.1);
@@ -126,7 +126,7 @@
 
     #one {
         text-align: right;
-        padding-top: 0px;
+        padding-left: 20px;
         width: 30%;
     }
 
@@ -139,7 +139,7 @@
     }
 
     .alldata {
-        padding-top: 20px;
+        padding-top: 10px;
     }
     @-webkit-keyframes pulsate {
         50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
@@ -171,8 +171,8 @@
         }
         #one .icon{
             text-align: center;
-            padding: 0 auto;
-            margin: 0 auto;
+            padding: 10px auto 0px auto;
+            margin: 0px auto 0px auto;
         }
         .wrapper{
             margin-top: 0px;
@@ -209,18 +209,18 @@
 <div id="message"></div>
 <div class="container">
     <div class="row-fluid alldata">
-        <div class=".col-xs-6 col-md-3" id="one">
+        <div class="col-xs-6 col-md-3 " id="one">
             <img src='' class="icon">
         </div>
-        <div class=".col-xs-6 col-md-3" id="two">
+        <div class="col-xs-6 col-md-3" id="two">
             <span class="description"></span>
         </div>
-        <div class=".col-xs-12 col-md-12">
+        <div class="col-xs-12 col-md-12">
             <span class="degree"></span><a href="#"><span  class="unit"></span></a>
         </div>
     </div>
-    <div class="row weather">
-        <div class="col-md-12">
+    <div class="row-fluid weather">
+        <div class="col-xs-12 col-md-12">
             <p>Humidity:  <strong class="humidity"></strong></p>
             <p>Wind:  <strong class="wind"></strong></p>
             <!--<p>Pressure: <strong class="pressure"></strong></p>-->
