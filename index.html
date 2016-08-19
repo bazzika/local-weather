@@ -49,14 +49,14 @@
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<script src="http://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
+<script src="https://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
 <script type="text/javascript">
     window.onload = function () {
         $("#user-city").text(ymaps.geolocation.city);
 //        $("#user-region").text(ymaps.geolocation.region);
         $("#user-country").text(ymaps.geolocation.country);
-        var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
         var apiID = '6c60640e68da403027951ee0b9d7e153';
         var apiURL = api + ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
         console.log(apiURL);
