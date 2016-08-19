@@ -1,0 +1,186 @@
+body {
+    text-align: center;
+    color: #D5DFDD;
+    font-family: 'Segoe UI','Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-weight: bolder;
+    height:100%;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px auto 0 auto;
+    font-size: 18px;
+    text-decoration: none;
+    position: fixed;
+    bottom: 30px;
+    color: #ffffff;
+}
+footer h5{
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+}
+a {
+    text-decoration: none;
+    color:inherit;
+}
+a:hover {
+    text-decoration: none;
+    color: snow;
+}
+a:focus{
+    text-decoration: none;
+}
+.wrapper {
+    background-color: #dddddd;
+    color: #D5DFDD;
+    background-image: url('images/bluesky.jpg');
+    margin-top: 20px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.top {
+    text-align: right;
+    padding: 10px 20px 20px 10px;
+    color: #D5DFDD;
+    position: absolute;
+    right: 10px;
+
+}
+
+.container {
+    position: relative;
+    width: 270px;
+    vertical-align: middle;
+
+    margin-top: 20px;
+    background-color: cadetblue;
+    padding: 20px -10px 40px -10px;
+    border-radius: 15%;
+    opacity: 0.9;
+    box-shadow: inset 0 0 10px 0 rgba(0,0,0,.1);
+    /*box-shadow: 0 0 10px 0 rgba(0,0,0,.4);*/
+
+}
+
+.weather {
+    text-align: center;
+    letter-spacing: 2px;
+    padding-left: 50px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+#user-city {
+    padding-top: 30px;
+    font-size: 3em;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #111;
+}
+
+#user-country {
+    font-size: 15px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #111;
+}
+
+h1 {
+    font-weight: 700;
+    font-family: 'Segoe UI',sans-serif;
+    font-size: 2em;
+    font-stretch: ultra-expanded;
+}
+
+p {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.degree {
+    font-size: 4em;
+}
+
+.unit {
+    font-size: 4em;
+    text-decoration: none;
+}
+
+#one {
+    text-align: right;
+    padding-left: 20px;
+    width: 30%;
+}
+
+#two {
+    text-align: justify;
+    vertical-align: middle;
+    font-weight: 600;
+    padding-top: 10px;
+    width: 70%;
+}
+
+.alldata {
+    padding-top: 10px;
+}
+@-webkit-keyframes pulsate {
+    50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
+}
+@keyframes pulsate {
+    50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
+}
+.unit {
+    color: rgb(245,245,245);
+    text-shadow: 0 -1px rgba(0,0,0,.1);
+    -webkit-animation: pulsate 1.2s linear infinite;
+    animation: pulsate 1.2s linear infinite;
+}
+.focused {
+    background: #abcdef;
+}
+@media screen and (max-width: 740px) {
+    footer {
+        text-align: center;
+        padding-top: 5px;
+        font-size: 20px;
+        text-decoration: none;
+        position: fixed;
+        bottom: 5px;
+    }
+    #user-city {
+        padding-top: 10px;
+        font-size: 2em;
+    }
+    #one .icon{
+        text-align: center;
+        padding: 10px auto 0px auto;
+        margin: 0px auto 0px auto;
+    }
+    .wrapper{
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+    .degree{
+        font-size: 3em;
+    }
+    .unit{
+        font-size: 3em;
+    }
+
+}
+@media screen and (max-width: 480px){
+    .wrapper {
+        background-size: cover;
+    }
+    #user-city {
+        margin-top: 2em;
+        position: relative;
+    }
+    .container{
+        margin-top: 10px;
+    }
+}
