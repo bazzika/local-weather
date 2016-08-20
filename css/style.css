@@ -35,7 +35,7 @@ a:focus{
 .wrapper {
     background-color: #dddddd;
     color: #D5DFDD;
-    background-image: url('images/bluesky.jpg');
+    background-image: url('../images/bluesky.jpg');
     margin-top: 20px;
     background-repeat: no-repeat;
     background-attachment: fixed;
