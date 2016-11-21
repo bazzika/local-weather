@@ -56,17 +56,17 @@
         $("#user-city").text(ymaps.geolocation.city);
 //        $("#user-region").text(ymaps.geolocation.region);
         $("#user-country").text(ymaps.geolocation.country);
-        var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
-        var apiID = '6c60640e68da403027951ee0b9d7e153';
-        var apiURL = api + ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
+        var api = 'https://api.darksky.net/forecast/f9e2f4de6611a0ad0d4af7f59750bbe9/';
+//        var apiID = '6c60640e68da403027951ee0b9d7e153';
+        var apiURL = api+ymaps.geolocation.latitude.toString() + ',' + ymaps.geolocation.longitude.toString();//ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
         console.log(apiURL);
         $.ajax({
             url: apiURL,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-//                $('#message').html(JSON.stringify(data));
-//                console.log(data);
+                $('#message').html(JSON.stringify(data));
+                console.log(data);
                 showWeather(data);
                 changeBGPicture(data);
                 toggleButton(data);
@@ -76,9 +76,9 @@
             }
         });
         function showWeather(data) {
-            $('.degree').html(Math.round((data.main.temp) * 9 / 5 - 459, 67));
+            $('.degree').html(Math.round((data.currently.temperature) * 9 / 5 - 459, 67));
             $('.unit').html('°F');
-            $('.description').html(data.weather[0].description);
+            $('.description').html(data.currently[0].summary);
             $('.humidity').html(data.main.humidity + '%');
             $('.wind').html(data.wind.speed + 'm/s');
 //        $('.pressure').html(data.main.pressure);
