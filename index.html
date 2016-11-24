@@ -63,9 +63,9 @@
         $.ajax({
             url: apiURL,
             type: 'GET',
-            dataType: 'json',
+            dataType: 'jsonp',
             success: function (data) {
-                $('#message').html(JSON.stringify(data));
+//                $('#message').html(JSON.stringify(data));
                 console.log(data);
                 showWeather(data);
                 changeBGPicture(data);
@@ -76,13 +76,13 @@
             }
         });
         function showWeather(data) {
-            $('.degree').html(Math.round((data.currently.temperature) * 9 / 5 - 459, 67));
-            $('.unit').html('°F');
-            $('.description').html(data.currently[0].summary);
-            $('.humidity').html(data.main.humidity + '%');
-            $('.wind').html(data.wind.speed + 'm/s');
+            $('.degree').text(Math.round((data.currently.temperature) * 9 / 5 - 459, 67));
+            $('.unit').text('°F');
+            $('.description').text(data.currently.summary);
+            $('.humidity').text(data.currently.humidity + '%');
+            $('.wind').text(data.currently.windSpeed + 'm/s');
 //        $('.pressure').html(data.main.pressure);
-            $('.icon').prop('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+            $('.icon').prop('src', 'images/icons/' + data.currently.icon + '.png');
 //            $('.weatherID').html(data.weather[0].id);
         }
 
