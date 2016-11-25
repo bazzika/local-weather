@@ -53,28 +53,31 @@
 <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
 <script type="text/javascript">
     ymaps.ready(function () {
-        var mapIconsToBackgroundImages={rain:'images/icons/rain.png',
-        clear-day:'images/icons/clear-day.png',
-        clear-night:'images/icons/clear-night.png',
-        cloudy:'images/icons/cloudy.png',
-        fog:'images/icons/fog.png',
-        hail:'images/icons/hail.png',
-        partly-cloudy-day:'images/icons/partly-cloudy-day.png',
-        partly-cloudy-night:'images/icons/rain.png',
-        snow:'images/icons/snow.png',
-        sleet:'images/icons/sleet.png',
-        thunderstorm:'images/icons/sleet.png'}
+        var mapIconsToBackgroundImages = {
+            rain: 'images/rain.jpg',
+            'clear-day': 'images/sunny.jpg',
+            'clear-night': 'images/clear-night.png',
+            cloudy: 'images/clouds.png',
+            fog: 'images/fog.png',
+            hail: 'images/hail.png',
+            'partly-cloudy-day': 'images/partly-cloudy-day.png',
+            'partly-cloudy-night': 'images/partly-cloudy-night.png',
+            snow: 'images/snow.jpg',
+            sleet: 'images/icons/sleet.png',
+            thunderstorm: 'images/icons/thunderstorm.jpg'
+        };
+        var latitude=ymaps.geolocation.latitude;
+        var longitude=ymaps.geolocation.longitude;
+        var clientKey='f9e2f4de6611a0ad0d4af7f59750bbe9';
         $("#user-city").text(ymaps.geolocation.city);
         $("#user-country").text(ymaps.geolocation.country);
-        var api = 'https://api.darksky.net/forecast/f9e2f4de6611a0ad0d4af7f59750bbe9/'+ymaps.geolocation.latitude.toString() + ',' + ymaps.geolocation.longitude.toString();
+        var api = 'https://api.darksky.net/forecast/'+clientKey+'/'+latitude + ',' + longitude;
         console.log(api);
         $.ajax({
             url: api,
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-//                $('#message').html(JSON.stringify(data));
-                console.log(data);
                 var currentWeatherStatus=data.currently;
                 showWeather({
                     temperature:currentWeatherStatus.temperature,
@@ -87,15 +90,15 @@
                 toggleButton(currentWeatherStatus.temperature);
             },
             error: function (err) {
-                console.log(err);
+                throw err;
             }
         });
         function showWeather(currentWeather) {
-            $('.degree').text(Math.round((currentWeather.temperature) * 9 / 5 - 459, 67));
+            $('.degree').text(Math.round(currentWeather.temperature));
             $('.unit').text('°F');
             $('.description').text(currentWeather.summary);
-            $('.humidity').text(currentWeather.humidity + '%');
-            $('.wind').text(currentWeather.windSpeed + 'm/s');
+            $('.humidity').text(currentWeather.humidity*100 + '%');
+            $('.wind').text(Math.round(currentWeather.windSpeed*0.44704) + 'm/s');
             $('.icon').prop('src', 'images/icons/' + currentWeather.icon + '.png');
         }
 
@@ -109,10 +112,10 @@
             $unit.on('click', function () {
 //                $unit.text('°F');
                 if ($unit.text()==='°F') {
-                    $degree.text(Math.round(temperature - 273.15));
+                    $degree.text(Math.round((temperature - 32)*5/9));
                     $unit.text('°C');
                 } else {
-                    $degree.text(Math.round((temperature) * 9 / 5 - 459, 67));
+                    $degree.text(Math.round((temperature)));
                     $unit.text('°F');
                 }
             });
