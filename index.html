@@ -52,77 +52,73 @@
 <script src="https://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
 <script type="text/javascript">
-    window.onload = function () {
+    ymaps.ready(function () {
+        var mapIconsToBackgroundImages={rain:'images/icons/rain.png',
+        clear-day:'images/icons/clear-day.png',
+        clear-night:'images/icons/clear-night.png',
+        cloudy:'images/icons/cloudy.png',
+        fog:'images/icons/fog.png',
+        hail:'images/icons/hail.png',
+        partly-cloudy-day:'images/icons/partly-cloudy-day.png',
+        partly-cloudy-night:'images/icons/rain.png',
+        snow:'images/icons/snow.png',
+        sleet:'images/icons/sleet.png',
+        thunderstorm:'images/icons/sleet.png'}
         $("#user-city").text(ymaps.geolocation.city);
-//        $("#user-region").text(ymaps.geolocation.region);
         $("#user-country").text(ymaps.geolocation.country);
-        var api = 'https://api.darksky.net/forecast/f9e2f4de6611a0ad0d4af7f59750bbe9/';
-//        var apiID = '6c60640e68da403027951ee0b9d7e153';
-        var apiURL = api+ymaps.geolocation.latitude.toString() + ',' + ymaps.geolocation.longitude.toString();//ymaps.geolocation.city + '&APPID=' + apiID;// ymaps.geolocation.city; //+','+ ymaps.geolocation.country +','+ apiID;
-        console.log(apiURL);
+        var api = 'https://api.darksky.net/forecast/f9e2f4de6611a0ad0d4af7f59750bbe9/'+ymaps.geolocation.latitude.toString() + ',' + ymaps.geolocation.longitude.toString();
+        console.log(api);
         $.ajax({
-            url: apiURL,
+            url: api,
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
 //                $('#message').html(JSON.stringify(data));
                 console.log(data);
-                showWeather(data);
-                changeBGPicture(data);
-                toggleButton(data);
+                var currentWeatherStatus=data.currently;
+                showWeather({
+                    temperature:currentWeatherStatus.temperature,
+                    summary:currentWeatherStatus.summary,
+                    windSpeed:currentWeatherStatus.windSpeed,
+                    icon:currentWeatherStatus.icon,
+                    humidity:currentWeatherStatus.humidity
+                });
+                changeBackgroundImage(currentWeatherStatus.icon);
+                toggleButton(currentWeatherStatus.temperature);
             },
             error: function (err) {
                 console.log(err);
             }
         });
-        function showWeather(data) {
-            $('.degree').text(Math.round((data.currently.temperature) * 9 / 5 - 459, 67));
+        function showWeather(currentWeather) {
+            $('.degree').text(Math.round((currentWeather.temperature) * 9 / 5 - 459, 67));
             $('.unit').text('°F');
-            $('.description').text(data.currently.summary);
-            $('.humidity').text(data.currently.humidity + '%');
-            $('.wind').text(data.currently.windSpeed + 'm/s');
-//        $('.pressure').html(data.main.pressure);
-            $('.icon').prop('src', 'images/icons/' + data.currently.icon + '.png');
-//            $('.weatherID').html(data.weather[0].id);
+            $('.description').text(currentWeather.summary);
+            $('.humidity').text(currentWeather.humidity + '%');
+            $('.wind').text(currentWeather.windSpeed + 'm/s');
+            $('.icon').prop('src', 'images/icons/' + currentWeather.icon + '.png');
         }
 
-        function changeBGPicture(data) {
-            var id = data.weather[0].id;
-            if (id >= 200 && id < 300) {
-                $('.wrapper').css("background-image", 'url(images/thunderstorm.jpg)');
-            } else if (id >= 300 && id <= 321) {
-                $('.wrapper').css("background-image", 'url(images/drizzle1.jpg)');
-            } else if (id >= 500 && id <= 531) {
-                $('.wrapper').css("background-image", 'url(images/rain.jpg)');
-            } else if (id >= 600 && id <= 622) {
-                $('.wrapper').css("background-image", 'url(images/snow.jpg)');
-            }
-//            else if(id>=701&&id<=781){
-//                $('.wrapper').css("background-image", "url()");
-//            }
-            else if (id == 800) {
-                $('.wrapper').css("background-image", 'url(images/sunnyday1.jpg)');
-            } else if (id >= 801 && id <= 804) {
-                $('.wrapper').css("background-image", 'url(images/clouds.jpg)');
-            } else
-                $('.wrapper').css("background-image", 'url(images/bluesky.jpg)');
+        function changeBackgroundImage(icon) {
+            var imageURL = mapIconsToBackgroundImages[icon];
+            $('.wrapper').css("background-image", 'url(' + imageURL + ')');
         }
-        function toggleButton(data) {
+        function toggleButton(temperature) {
             var $unit = $('.unit');
             var $degree = $('.degree');
             $unit.on('click', function () {
 //                $unit.text('°F');
                 if ($unit.text()==='°F') {
-                    $degree.text(Math.round(data.main.temp - 273.15));
+                    $degree.text(Math.round(temperature - 273.15));
                     $unit.text('°C');
                 } else {
-                    $degree.text(Math.round((data.main.temp) * 9 / 5 - 459, 67));
+                    $degree.text(Math.round((temperature) * 9 / 5 - 459, 67));
                     $unit.text('°F');
                 }
             });
         }
 
-    };
+    });
 
 </script>
 </html>
