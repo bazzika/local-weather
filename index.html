@@ -8,14 +8,8 @@
     <title>Local weather</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <body class="wrapper js-background">
-<!--<div class="row top">-->
-    <!--<h1>LOCAL WEATHER APP </h1>-->
-<!--</div>-->
 <div id="user-city"></div>
 <div id="user-region"></div>
 <div id="user-country"></div>
@@ -36,92 +30,15 @@
         <div class="col-xs-12 col-md-12">
             <p>Humidity:  <strong class="humidity js-humidity"></strong></p>
             <p>Wind:  <strong class="wind js-wind"></strong></p>
-            <!--<p>Pressure: <strong class="pressure"></strong></p>-->
-            <!--<p>ID: <strong class="weatherID"></strong></p>-->
         </div>
     </div>
 </div>
 <footer>
-    <!--<a href="https://www.freecodecamp.com/challenges/show-the-local-weather"><h1>LOCAL WEATHER APP</h1></a>-->
     <h5>bazzika&copy</h5>
 </footer>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-<script src="https://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=en" type="text/javascript"></script>
-<script src="localWeather.js">
-//    ymaps.ready(function () {
-//        var mapIconsToBackgroundImages = {
-//            rain: 'images/rain.jpg',
-//            'clear-day': 'images/sunny.jpg',
-//            'clear-night': 'images/clear-night.png',
-//            cloudy: 'images/clouds.png',
-//            fog: 'images/fog.png',
-//            hail: 'images/hail.png',
-//            'partly-cloudy-day': 'images/partly-cloudy-day.png',
-//            'partly-cloudy-night': 'images/partly-cloudy-night.png',
-//            snow: 'images/snow.jpg',
-//            sleet: 'images/icons/sleet.png',
-//            thunderstorm: 'images/icons/thunderstorm.jpg'
-//        };
-//        var latitude=ymaps.geolocation.latitude;
-//        var longitude=ymaps.geolocation.longitude;
-//        var clientKey='f9e2f4de6611a0ad0d4af7f59750bbe9';
-//        $("#user-city").text(ymaps.geolocation.city);
-//        $("#user-country").text(ymaps.geolocation.country);
-//        var api = 'https://api.darksky.net/forecast/'+clientKey+'/'+latitude + ',' + longitude;
-//        console.log(api);
-//        $.ajax({
-//            url: api,
-//            type: 'GET',
-//            dataType: 'jsonp',
-//            success: function (data) {
-//                var currentWeatherStatus=data.currently;
-//                showWeather({
-//                    temperature:currentWeatherStatus.temperature,
-//                    summary:currentWeatherStatus.summary,
-//                    windSpeed:currentWeatherStatus.windSpeed,
-//                    icon:currentWeatherStatus.icon,
-//                    humidity:currentWeatherStatus.humidity
-//                });
-//                changeBackgroundImage(currentWeatherStatus.icon);
-//                toggleButton(currentWeatherStatus.temperature);
-//            },
-//            error: function (err) {
-//                throw err;
-//            }
-//        });
-//        function showWeather(currentWeather) {
-//            $('.degree').text(Math.round(currentWeather.temperature));
-//            $('.unit').text('°F');
-//            $('.description').text(currentWeather.summary);
-//            $('.humidity').text(currentWeather.humidity*100 + '%');
-//            $('.wind').text(Math.round(currentWeather.windSpeed*0.44704) + 'm/s');
-//            $('.icon').prop('src', 'images/icons/' + currentWeather.icon + '.png');
-//        }
-//
-//        function changeBackgroundImage(icon) {
-//            var imageURL = mapIconsToBackgroundImages[icon];
-//            $('.wrapper').css("background-image", 'url(' + imageURL + ')');
-//        }
-//        function toggleButton(temperature) {
-//            var $unit = $('.unit');
-//            var $degree = $('.degree');
-//            $unit.on('click', function () {
-////                $unit.text('°F');
-//                if ($unit.text()==='°F') {
-//                    $degree.text(Math.round((temperature - 32)*5/9));
-//                    $unit.text('°C');
-//                } else {
-//                    $degree.text(Math.round((temperature)));
-//                    $unit.text('°F');
-//                }
-//            });
-//        }
-//
-//    });
-
-</script>
+<script src="localWeather.js"></script>
 </html>
