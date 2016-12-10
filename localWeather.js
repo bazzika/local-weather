@@ -1,19 +1,25 @@
 /**
  * Created by bazzika
  */
+$(window).on('load', function () {
+  var $preloader = $('#page-preloader'),
+    $spinner   = $preloader.find('.spinner');
+  $spinner.fadeOut();
+  $preloader.delay(350).fadeOut('slow');
+});
 ymaps.ready(function () {
   var mapIconsToBackgroundImages = {
-    rain: 'images/rain.jpg',
-    'clear-day': 'images/sunny.jpg',
-    'clear-night': 'images/clear-night.png',
-    cloudy: 'images/clouds.png',
-    fog: 'images/fog.png',
-    hail: 'images/hail.png',
-    'partly-cloudy-day': 'images/partly-cloudy-day.png',
-    'partly-cloudy-night': 'images/bluesky.jpg',
-    snow: 'images/snow.jpg',
-    sleet: 'images/icons/sleet.png',
-    thunderstorm: 'images/icons/thunderstorm.jpg'
+    rain: 'rain',
+    'clear-day': 'clear-day',
+    'clear-night': 'clear-night',
+    cloudy: 'cloudy',
+    fog: 'fog',
+    hail: 'hail',
+    'partly-cloudy-day': 'partly-cloudy-day',
+    'partly-cloudy-night': 'partly-cloudy-night',
+    snow: 'snow',
+    sleet: 'sleet',
+    thunderstorm: 'thunderstorm'
   };
   var DEGREE_FAREINGEIT = '°F';
   var DEGREE_CELCIUM = '°C';
@@ -24,6 +30,8 @@ ymaps.ready(function () {
   $("#user-country").text(ymaps.geolocation.country);
   var api = 'https://api.darksky.net/forecast/' + clientKey + '/' + latitude + ',' + longitude;
   console.log(api);
+
+
   $.ajax({
     url: api,
     type: 'GET',
@@ -44,17 +52,16 @@ ymaps.ready(function () {
     }
   });
   function showWeather(currentWeather) {
-    //TODO: use map as for icon as for image
     var imageURL = mapIconsToBackgroundImages[currentWeather.icon];
+    var iconURL = mapIconsToBackgroundImages[currentWeather.icon];
     $('.js-degree').text(Math.round(currentWeather.temperature));
     $('.js-unit').text(DEGREE_FAREINGEIT);
     $('.js-description').text(currentWeather.summary);
     $('.js-humidity').text(currentWeather.humidity * 100 + '%');
     $('.js-wind').text(Math.round(currentWeather.windSpeed * 0.44704) + 'm/s');
-    $('.js-icon').prop('src', 'images/icons/' + currentWeather.icon + '.png');
-    $('.js-background').css("background-image", 'url(' + imageURL + ')');
+    $('.js-icon').prop('src', 'images/icons/' + iconURL + '.png');
+    $('.js-background').css("background-image", 'url(' +'images/'+ imageURL + '.jpg'+')');
   }
-
   function toggleUnit(temperature) {
     var $unit = $('.js-unit');
     var $degree = $('.js-degree');
@@ -71,5 +78,4 @@ ymaps.ready(function () {
       $unit.text(measure);
     });
   }
-
 });
