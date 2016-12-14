@@ -49,6 +49,7 @@ ymaps.ready(function () {
     },
     error: function (err) {
       throw err;
+      console.log(err);
     }
   });
   function showWeather(currentWeather) {
